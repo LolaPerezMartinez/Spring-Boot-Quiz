@@ -3,7 +3,6 @@ package com.miempresa.quiz_app.controller;
 import com.miempresa.quiz_app.model.mongo.document.Pregunta;
 import com.miempresa.quiz_app.service.PreguntaServiceImpl;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -18,12 +17,6 @@ public class PreguntaController {
 
     public PreguntaController(PreguntaServiceImpl service) {
         this.preguntaService = service;
-    }
-    
-    @GetMapping("/home") 
-    public String home(Model model) {
-        model.addAttribute("mensaje", "¡Bienvenido al Quiz de Programación!");
-        return "home"; 
     }
     
     // Obtener todas las preguntas
