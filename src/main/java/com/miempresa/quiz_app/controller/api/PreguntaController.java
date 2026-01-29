@@ -1,7 +1,7 @@
-package com.miempresa.quiz_app.controller;
+package com.miempresa.quiz_app.controller.api;
 
 import com.miempresa.quiz_app.model.mongo.document.Pregunta;
-import com.miempresa.quiz_app.service.PreguntaServiceImpl;
+import com.miempresa.quiz_app.service.impl.PreguntaServiceImpl;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

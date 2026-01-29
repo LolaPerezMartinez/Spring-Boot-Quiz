@@ -1,9 +1,11 @@
-package com.miempresa.quiz_app.service;
+package com.miempresa.quiz_app.service.impl;
 
 import com.miempresa.quiz_app.model.mongo.document.Pregunta;
 import com.miempresa.quiz_app.model.mysql.entity.Jugador;
 import com.miempresa.quiz_app.model.mysql.entity.Partida;
 import com.miempresa.quiz_app.repository.mysql.JugadorRepository;
+import com.miempresa.quiz_app.service.JuegoService;
+import com.miempresa.quiz_app.service.PartidaService;
 import com.miempresa.quiz_app.repository.mongo.PreguntaRepository;
 
 
@@ -32,12 +34,14 @@ public class JuegoServiceImpl implements JuegoService {
     }
 
     @Override
-    public List<Pregunta> generarPreguntas(String categoria, String tipo, int cantidad) {
+    public List<Pregunta> generarPreguntas(List<String> categorias, 
+    				List<Pregunta.TipoPregunta> tipos, int cantidad) {
         List<Pregunta> todas = preguntaRepo.findAll();
 
         List<Pregunta> filtradas = todas.stream()
-                .filter(p -> categoria == null || p.getCategoria().equalsIgnoreCase(categoria))
-                .filter(p -> tipo == null || p.getTipo().name().equalsIgnoreCase(tipo))
+        		.filter(p -> categorias == null || categorias.contains(p.getCategoria()))
+        		.filter(p -> tipos == null || tipos.contains(p.getTipo()))
+
                 .toList();
 
         Collections.shuffle(filtradas);
@@ -46,13 +50,14 @@ public class JuegoServiceImpl implements JuegoService {
     }
 
     @Override
-    public Partida iniciarPartida(Jugador jugador, String categoria, String tipo, int cantidad) {
-        List<Pregunta> preguntas = generarPreguntas(categoria, tipo, cantidad);
+    public Partida iniciarPartida(Jugador jugador, List<String> categorias, 
+			List<Pregunta.TipoPregunta> tipos, int cantidad) {
+        List<Pregunta> preguntas = generarPreguntas(categorias, tipos, cantidad);
         Partida partida = new Partida();
         partida.setJugador(jugador);
         partida.setTotalPreguntas(preguntas.size());
-        partida.setCategoria(categoria);
-        partida.setTipoPregunta(tipo);
+        partida.setCategorias(categorias);
+        partida.setTipos(tipos);
         return partidaService.guardar(partida);
     }
 
