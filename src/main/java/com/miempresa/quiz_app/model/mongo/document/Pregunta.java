@@ -12,39 +12,110 @@ public class Pregunta {
     private String id;
     private String enunciado;        
     private TipoPregunta tipo;      
-    private List<String> opciones;   // Opciones de respuesta (si aplica)
-    private List<String> respuestas; // Respuesta(s) correcta(s)
-    private String categoria;        // Tema o categoría
-    private String dificultad;       // Fácil, Media, Difícil
-
+    private List<String> opciones;   
+    private List<String> respuestas; 
+    private String categoria;        
+    private List<String> respuestasCorrectas;
    
     public Pregunta() {
     	
     }
 
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
 
-    public String getEnunciado() { return enunciado; }
-    public void setEnunciado(String enunciado) { this.enunciado = enunciado; }
-
-    public TipoPregunta getTipo() { return tipo; }
-    public void setTipo(TipoPregunta tipo) { this.tipo = tipo; }
-
-    public List<String> getOpciones() { return opciones; }
-    public void setOpciones(List<String> opciones) { this.opciones = opciones; }
-
-    public List<String> getRespuestas() { return respuestas; }
-    public void setRespuestas(List<String> respuestas) { this.respuestas = respuestas; }
-
-    public String getCategoria() { return categoria; }
-    public void setCategoria(String categoria) { this.categoria = categoria; }
-
-    public String getDificultad() { return dificultad; }
-    public void setDificultad(String dificultad) { this.dificultad = dificultad; }
     
-    public enum TipoPregunta {
+    public String getId() {
+		return id;
+	}
+
+
+
+
+	public String getEnunciado() {
+		return enunciado;
+	}
+
+
+
+
+	public void setEnunciado(String enunciado) {
+		this.enunciado = enunciado;
+	}
+
+
+
+
+	public TipoPregunta getTipo() {
+		return tipo;
+	}
+
+
+
+
+	public void setTipo(TipoPregunta tipo) {
+		this.tipo = tipo;
+	}
+
+
+
+
+	public List<String> getOpciones() {
+		return opciones;
+	}
+
+
+
+
+	public void setOpciones(List<String> opciones) {
+		this.opciones = opciones;
+	}
+
+
+
+
+	public List<String> getRespuestas() {
+		return respuestas;
+	}
+
+
+
+
+	public void setRespuestas(List<String> respuestas) {
+		this.respuestas = respuestas;
+	}
+
+
+
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+
+
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+
+
+
+	public List<String> getRespuestasCorrectas() {
+		return respuestasCorrectas;
+	}
+
+
+
+
+	public void setRespuestasCorrectas(List<String> respuestasCorrectas) {
+		this.respuestasCorrectas = respuestasCorrectas;
+	}
+
+
+
+
+	public enum TipoPregunta {
     	VF, UNICA, MULTIPLE;
 
     }

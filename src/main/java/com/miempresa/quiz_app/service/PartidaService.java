@@ -9,7 +9,7 @@ public interface PartidaService {
 
     Partida guardar(Partida partida);
 
-    Optional<Partida> obtenerPorId(Long id);
+    Optional<Partida> getById(Long id);
 
     List<Partida> obtenerRankingTop10();
 

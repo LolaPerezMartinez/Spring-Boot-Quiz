@@ -1,7 +1,7 @@
 package com.miempresa.quiz_app.controller.api;
 
 import com.miempresa.quiz_app.model.mongo.document.Pregunta;
-import com.miempresa.quiz_app.service.impl.PreguntaServiceImpl;
+import com.miempresa.quiz_app.service.PreguntaService;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -9,13 +9,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/preguntas")
-@CrossOrigin(origins = "*")
 public class PreguntaController {
 	
 	//NO AUTOWIRED con constructor es mas seguro y actual
-    private final PreguntaServiceImpl preguntaService;
+    private final PreguntaService preguntaService;
 
-    public PreguntaController(PreguntaServiceImpl service) {
+    public PreguntaController(PreguntaService service) {
         this.preguntaService = service;
     }
     

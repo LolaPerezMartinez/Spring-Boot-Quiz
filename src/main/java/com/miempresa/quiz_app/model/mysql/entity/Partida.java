@@ -2,6 +2,7 @@ package com.miempresa.quiz_app.model.mysql.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.miempresa.quiz_app.model.mongo.document.Pregunta;
@@ -20,14 +21,30 @@ public class Partida {
 
     private int totalPreguntas;
     private int aciertos;
+    private int puntos;                          // ← NUEVO: puntaje acumulado
 
-    private List<String> categorias; 
-	private	List<Pregunta.TipoPregunta> tipos;
+    @ElementCollection
+    @CollectionTable(name = "partida_categorias", joinColumns = @JoinColumn(name = "partida_id"))
+    @Column(name = "categoria")
+    private List<String> categorias = new ArrayList<>();
+
+    @ElementCollection
+    @Enumerated(EnumType.STRING) // Importante para guardar el texto del Enum y no el índice
+    @CollectionTable(name = "partida_tipos", joinColumns = @JoinColumn(name = "partida_id"))
+    @Column(name = "tipo")
+    private List<Pregunta.TipoPregunta> tipos = new ArrayList<>();
+
+    @ElementCollection                           // ← NUEVO: IDs de preguntas de MongoDB
+    @CollectionTable(name = "partida_preguntas", joinColumns = @JoinColumn(name = "partida_id"))
+    @Column(name = "pregunta_id")
+    private List<String> preguntaIds;
 
     private LocalDateTime fecha;
 
     public Partida() {
         this.fecha = LocalDateTime.now();
+        this.puntos = 0;
+        this.aciertos = 0;
     }
 
 	public Long getId() {
@@ -59,6 +76,14 @@ public class Partida {
 		this.aciertos = aciertos;
 	}
 
+	public int getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+
 	public List<String> getCategorias() {
 		return categorias;
 	}
@@ -75,6 +100,14 @@ public class Partida {
 		this.tipos = tipos;
 	}
 
+	public List<String> getPreguntaIds() {
+		return preguntaIds;
+	}
+
+	public void setPreguntaIds(List<String> preguntaIds) {
+		this.preguntaIds = preguntaIds;
+	}
+
 	public LocalDateTime getFecha() {
 		return fecha;
 	}
@@ -83,5 +116,6 @@ public class Partida {
 		this.fecha = fecha;
 	}
 
-    
+	
+
 }
