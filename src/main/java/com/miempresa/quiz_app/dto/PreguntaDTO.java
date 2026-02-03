@@ -4,18 +4,13 @@ import com.miempresa.quiz_app.model.mongo.document.Pregunta;
 import java.util.List;
 
 public record PreguntaDTO(
-		
-	//NO PUEDE CONTENER NUNCA RESPUESTAS CORRECTAS
     String id,
     String enunciado,
     Pregunta.TipoPregunta tipo,
     String categoria,
     List<String> opciones
 ) {
-    /**
-     * Constructor para convertir fácilmente el Documento de Mongo a DTO.
-     * Usamos esto en el Service: preguntas.stream().map(PreguntaDTO::new)
-     */
+    // Constructor de conveniencia para mapear desde el documento de MongoDB
     public PreguntaDTO(Pregunta p) {
         this(
             p.getId(),

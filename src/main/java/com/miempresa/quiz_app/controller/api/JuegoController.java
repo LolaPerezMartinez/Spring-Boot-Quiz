@@ -4,7 +4,6 @@ import com.miempresa.quiz_app.dto.PartidaResponse;
 import com.miempresa.quiz_app.dto.RespuestaRequest;
 import com.miempresa.quiz_app.dto.RespuestaResultadoDTO;
 import com.miempresa.quiz_app.service.JuegoService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

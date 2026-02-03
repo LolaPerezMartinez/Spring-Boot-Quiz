@@ -1,7 +1,6 @@
 package com.miempresa.quiz_app.controller.web;
 
 import com.miempresa.quiz_app.dto.PartidaResponse;
-import com.miempresa.quiz_app.model.mongo.document.Pregunta;
 import com.miempresa.quiz_app.service.JuegoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-//Recibir el formulario del Home → Crear partida → Redirigir a React
 @Controller
 public class JuegoWebController {
 
@@ -23,27 +21,17 @@ public class JuegoWebController {
             @RequestParam(required = false) Long id,
             @RequestParam String nombre,
             @RequestParam(required = false) List<String> categorias,
-            @RequestParam(required = false) List<String> tipos,
+            @RequestParam(required = false) List<String> tipos,  // String directamente
             @RequestParam(defaultValue = "10") int cantidad,
             RedirectAttributes redirectAttributes) {
-        
+
         try {
-            // Convertir tipos de String a Enum si no es null
-            List<Pregunta.TipoPregunta> tiposEnum = null;
-            if (tipos != null && !tipos.isEmpty()) {
-                tiposEnum = tipos.stream()
-                    .map(t -> Pregunta.TipoPregunta.valueOf(t.toUpperCase()))
-                    .toList();
-            }
-            
-            // Iniciar partida
-            PartidaResponse partida = juegoService.iniciarPartida(
-                id, nombre, categorias, tiposEnum, cantidad
+            // Solo delega al service, sin conversiones ni validaciones
+            PartidaResponse partida = juegoService.iniciarPartida(id, nombre, categorias, tipos, cantidad
             );
-            
-            // Redirigir a React con el partidaId en la URL
+
             return "redirect:http://localhost:5173/juego?partidaId=" + partida.partidaId();
-            
+
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("error", "Datos inválidos: " + e.getMessage());
             return "redirect:/";

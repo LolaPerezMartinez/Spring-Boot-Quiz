@@ -20,9 +20,8 @@ public class HomeController {
 
 		model.addAttribute("categorias", opciones.categorias());
 		model.addAttribute("tipos", opciones.tipos());
-		model.addAttribute("cantidadMax", opciones.cantidadMaxima());
-
-		return "home";
+		model.addAttribute("opcionesCantidad", opciones.opcionesCantidad());
+		return "/pregunta-home/home";
 	}
 
 	@GetMapping("/error500-test")
