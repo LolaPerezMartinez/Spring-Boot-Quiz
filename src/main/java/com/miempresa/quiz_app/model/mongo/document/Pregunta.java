@@ -16,7 +16,12 @@ public class Pregunta {
     private List<String> respuestas; 
     private String categoria;        
     private List<String> respuestasCorrectas;
-   
+    
+    public enum TipoPregunta {
+    	VF, UNICA, MULTIPLE;
+
+    }
+    
     public Pregunta() {
     	
     }
@@ -115,10 +120,7 @@ public class Pregunta {
 
 
 
-	public enum TipoPregunta {
-    	VF, UNICA, MULTIPLE;
-
-    }
+	
 
     
 }

@@ -174,15 +174,17 @@ public class JuegoServiceImpl implements JuegoService {
     }
 
     private Jugador gestionarJugador(Long jugadorId, String nombre) {
+        // Si React nos manda un ID (porque el jugador ya estaba logueado o existe en la sesión)
         if (jugadorId != null) {
             return jugadorRepo.findById(jugadorId)
                     .orElseThrow(() -> new IllegalArgumentException("Jugador no encontrado"));
         }
-        // Si no hay ID, buscamos por nombre para evitar duplicados, o creamos uno nuevo
-        return jugadorRepo.findByNombre(nombre)
-                .orElseGet(() -> jugadorRepo.save(new Jugador(nombre)));
+        
+        // Si no hay ID, CREAMOS uno nuevo siempre, aunque el nombre coincida con otro
+        // Esto generará un nuevo ID auto-incremental en tu tabla MySQL
+        return jugadorRepo.save(new Jugador(nombre));
     }
-
+    
     private List<Pregunta.TipoPregunta> convertirTiposStringAEnum(List<String> tiposStr) {
         if (tiposStr == null || tiposStr.isEmpty()) return List.of();
         return tiposStr.stream()

@@ -13,7 +13,7 @@ public class HomeController {
 	@Autowired
 	private JuegoService juegoService;
 
-	@GetMapping("/")
+	@GetMapping({"/", "/home"})
 	public String mostrarHome(Model model) {
 		// Obtener opciones disponibles para mostrar en el formulario
 		OpcionesQuizDTO opciones = juegoService.obtenerOpcionesDisponibles();
