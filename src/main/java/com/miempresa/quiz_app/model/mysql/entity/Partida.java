@@ -38,6 +38,18 @@ public class Partida {
     @CollectionTable(name = "partida_preguntas", joinColumns = @JoinColumn(name = "partida_id"))
     @Column(name = "pregunta_id")
     private List<String> preguntaIds;
+    
+    @Column(name = "preguntas_respondidas")
+    private int preguntasRespondidas = 0; 
+
+    // Getter y Setter
+    public int getPreguntasRespondidas() {
+        return preguntasRespondidas;
+    }
+
+    public void setPreguntasRespondidas(int preguntasRespondidas) {
+        this.preguntasRespondidas = preguntasRespondidas;
+    }
 
     private LocalDateTime fecha;
 

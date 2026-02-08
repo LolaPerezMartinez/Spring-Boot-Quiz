@@ -1,17 +1,29 @@
 package com.miempresa.quiz_app.service;
 
 import com.miempresa.quiz_app.dto.*;
+import com.miempresa.quiz_app.model.mysql.entity.Jugador;
 import java.util.List;
 
 public interface JuegoService {
+
+    /**
+     * Obtiene las categorías y tipos de preguntas disponibles en la base de datos.
+     */
     OpcionesQuizDTO obtenerOpcionesDisponibles();
-    
-    PartidaResponse iniciarPartida(Long jugadorId, String nombre, 
-                                          List<String> categorias, 
-                                          List<String> tipos, 
-                                          Integer cantidad);
-                                          
-    PartidaResponse obtenerPartidaConPreguntas(Long partidaId);
-    
+
+    /**
+     * Inicia una nueva partida para un jugador ya autenticado.
+     */
+    PartidaResponse iniciarPartida(Jugador jugador, List<String> categorias, 
+                                  List<String> tiposStr, Integer cantidadSeleccionada);
+
+    /**
+     * Registra la respuesta de un usuario y actualiza el progreso de la partida.
+     */
     RespuestaResultadoDTO registrarRespuesta(Long partidaId, String preguntaId, List<String> respuestasUsuario);
+
+    /**
+     * Recupera una partida con sus preguntas completas (para reconexión o vista final).
+     */
+    PartidaResponse obtenerPartidaConPreguntas(Long partidaId);
 }
