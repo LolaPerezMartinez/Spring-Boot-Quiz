@@ -16,8 +16,8 @@ public class Partida {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "jugador_id", nullable = false)
-    private Jugador jugador;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     private int totalPreguntas;
     private int aciertos;
@@ -64,12 +64,12 @@ public class Partida {
 	}
 
 
-	public Jugador getJugador() {
-		return jugador;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public int getTotalPreguntas() {

@@ -16,4 +16,5 @@ public interface PartidaService {
     List<Partida> obtenerPorJugador(Long jugadorId);
 
     Partida actualizar(Partida partida);
+    
 }

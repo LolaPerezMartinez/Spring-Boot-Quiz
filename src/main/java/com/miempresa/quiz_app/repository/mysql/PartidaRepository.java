@@ -8,6 +8,8 @@ import java.util.List;
 public interface PartidaRepository extends JpaRepository<Partida, Long> {
 
     List<Partida> findTop10ByOrderByAciertosDesc();
-
-    List<Partida> findByJugadorId(Long jugadorId);
+    
+    List<Partida> findByUsuarioId(Long usuarioId);
+   // List<Partida> findByUsuario(Usuario usuario);
+    //List<Partida> findByJugadorId(Long jugadorId);
 }
