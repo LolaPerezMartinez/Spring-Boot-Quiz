@@ -4,6 +4,8 @@ import com.miempresa.quiz_app.model.mongo.document.Pregunta;
 import com.miempresa.quiz_app.service.PreguntaService;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +18,13 @@ public class PreguntaController {
 
     public PreguntaController(PreguntaService service) {
         this.preguntaService = service;
+    }
+    /*
+     * MultipartFile es el objeto estándar para manejar archivos físicos que vienen desde el exterior.
+     */
+    @PostMapping("/importar")
+    public List<Pregunta> importarPreguntas(@RequestParam("archivo") MultipartFile archivo) {
+        return preguntaService.importarDesdeArchivo(archivo);
     }
     
     // Obtener todas las preguntas
